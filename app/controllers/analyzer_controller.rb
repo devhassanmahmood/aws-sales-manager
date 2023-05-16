@@ -1,13 +1,14 @@
 # analyzer_controller.rb
 class AnalyzerController < ApplicationController
+
+  before_action :sales_header
+
   def index
-    sales_header
     @filtered_data = []
   end
 
   def filter_data
     @uploaded_file = params[:attachment]
-    sales_header
     analyze_data
     
     respond_to do |format|
@@ -37,8 +38,6 @@ class AnalyzerController < ApplicationController
       end
     end
   end
-
-  private
 
   def sales_header
     @sales_header ||= ['Campaign Name (Informational only)',
